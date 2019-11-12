@@ -1,0 +1,179 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+          </div>
+        <div class="col-md-4">
+         
+  <h1>Driver List</h1>
+
+</div>
+<div class="col-md-4">
+  </div>
+</div>
+
+  <br>
+  <div class="container">
+    <table class="table table-striped table-bordered table-hover table-sm">
+      <thead>
+        <tr>
+          <th>S.No.</th>
+          <th>Driver Name</th>
+          <th>Active</th>
+          <th>Detail</th>
+          <th>Dated</th>
+          <th>add</th>
+          <th>Ph</th>
+          <th>Licence No</th>
+          <th>ssn</th>
+          <th>email</th>
+          <th>sal</th>
+          <th>...</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let driver of returnedArray">
+          <td>{{driver.id}}</td>
+          <td>{{driver.name}}</td>
+          <td>{{driver.active}}</td>
+          <td>{{driver.detail}}</td>
+          <td>{{driver.dated | date:'dd-MM-yyyy h:m a'}}</td>
+          <td>{{driver.address}}</td>
+          <td>{{driver.ph}}</td>
+          <td>{{driver.licenseNo}}</td>
+          <td>{{driver.ssn}}</td>
+          <td>{{driver.email}}</td>
+          <td>{{driver.sal}}</td>
+
+
+          <td>
+            <button class="btn btn-primary" (click)="edit(driver)">Edit</button>
+            <button class="btn btn-outline-danger" (click)="delete(driver)">Delete</button>
+            <a routerLink="view/{{driver.id}}"  class="btn btn-primary btn-sm">Print</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <pagination [totalItems]="driverList.length" [itemsPerPage]="pageSize" (pageChanged)="pageChanged($event)"></pagination>
+
+  <br>
+
+
+  <div class="container">
+    <h2>Create/Edit Driver</h2>
+  </div>
+  <div class="container">
+    
+      <div class="row">
+        <div class="col-md-5">
+          <form >
+           <!-- <form name="form" [formGroup]="form">-->
+          <table class="table table-borderless table-sm ">
+            <tbody>
+            <tr>
+
+              <td>Driver Name</td>
+
+              <td>
+                <!--<div class="form-group">-->
+                <input type="text" [(ngModel)]="currentDriver.name" name="name">
+                <!--<input type="text" [(ngModel)]="currentDriver.name" name="name" class="form-control" formControlName="name" [ngClass]="{'is-invalid':form.get('name').touched && form.get('name').invalid}" />
+                <div class="invalid-feedback">
+                  <div>Name is Required</div>
+                </div>
+              </div>-->
+              </td>
+            </tr>
+            <tr>
+              <td>Driver Detail</td>
+              <td>
+                <textarea [(ngModel)]="currentDriver.detail" name="detail"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>Driver Address</td>
+              <td>
+                <textarea [(ngModel)]="currentDriver.address" name="add"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>Driver Phone</td>
+              <td>
+                <textarea [(ngModel)]="currentDriver.ph" name="ph"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>Driver licenseNo</td>
+              <td>
+                <textarea [(ngModel)]="currentDriver.licenseNo" name="lic"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>Driver Ssn</td>
+              <td>
+                <textarea [(ngModel)]="currentDriver.ssn" name="dr"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>Driver email</td>
+              <td>
+                <textarea [(ngModel)]="currentDriver.email" name="em"></textarea>
+              </td>
+            </tr>
+            
+              <tr>
+                <td>Driver Salary</td>
+                <td>
+                  <textarea [(ngModel)]="currentDriver.sal" name="sal"></textarea>
+                </td>
+              </tr>
+              <tr *ngIf="currentDriver.id!=null">
+                  <td colspan="2">
+                    <button type="button" class="btn btn-primary btn-sm" (click)="update()">Update Driver</button>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="cancel()">Cancel</button>
+                  </td>
+                </tr>
+                
+                <tr *ngIf="currentDriver.id==null">
+                    <td colspan="2">
+                      <!--<button type="button" [disabled]="!form.valid"  class="btn btn-primary btn-sm" (click)="save()">Save Driver</button>-->
+                      <button type="button" class="btn btn-primary btn-sm" (click)="save()">Save Driver</button>
+                    </td>
+                  </tr>
+                </tbody>
+          </table>
+        </form>
+        </div>
+        <div class="col-md-2">
+          </div>
+                
+              <div class="col-md-5">
+                  <div class="form-group">
+                      <h2>Filter Driver</h2>
+                      </div>
+                    
+                <div class="form-group">
+                  <select name="filterby" id="" [(ngModel)]="filterBy" class="formcontrol form-control-sm">
+                    <option ngValue="">Select Column Name</option>
+                    <option ngValue="Id">Id</option>
+                    <option ngValue="Name">Name</option>
+                   <!-- <option ngValue="Detail">Detail</option>-->
+                  </select>
+                </div>
+                <div class="form-group">
+                  <input type="text" [(ngModel)]="filterText" placeholder="Enter keyword" class="form-control form-control-sm">
+                </div>
+                <div class="form-group">
+                  <div class=row>
+                  <button (click)="filter()" class="btn btn-primary btn-sm">Filter</button>
+                  <p>.</p>
+                  <button (click)="clearfilter()" class="btn btn-primary btn-sm">Clear Filter</button>
+                </div>
+              </div>
+              </div>
+            
+              
+          
+      </div>
+   
+  </div>

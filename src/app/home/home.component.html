@@ -1,0 +1,269 @@
+<br>
+<div class="container">
+  <form>
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group row">
+          <label class="col-md-4" for="">Invoice No</label>
+          <input type="text" readonly class="form-control form-control-sm col-md-8" value="{{invoice.id}}">
+
+
+        </div>
+
+
+        <div class="from-group row">
+          <label class="col-md-4" for="">Company</label>
+          <select name="cc" [(ngModel)]="comSelected" (ngModelChange)='onComSelected($event)' class="form-control form-control-sm col-md-8">
+
+            <option *ngFor="let c of companies" [value]="c.id">{{c.name}}</option>
+          </select>
+
+        </div>
+
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-5">
+        <div class="form-group row">
+          <label class="col-md-4" for="">Guest Name</label>
+          <input type="text" class="form-control form-control-sm col-md-8" [(ngModel)]="invoice.guest" name="guest">
+
+        </div>
+        <div class="form-group row">
+          <label class="col-md-4" for="">Driver</label>
+          <select name="dd" [(ngModel)]="driverSelected" (ngModelChange)='onDriverSelected($event)' class="form-control form-control-sm col-md-8">
+
+            <option *ngFor="let c of drivers" [value]="c.id">{{c.name}}</option>
+          </select>
+
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-4" for="">Vehicle</label>
+          <select name="vehicle" [(ngModel)]="vehSelected" (ngModelChange)='onVehSelected($event)' class="form-control form-control-sm col-md-8">
+
+            <option *ngFor="let c of vehicles" [value]="c.id">{{c.name}}</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+
+    <div *ngIf="this.invoice.vehicle!=null" class="row">
+      <div class="col-md-12">
+        <div class="row" style="background: #eee;padding-top: 5px;padding-bottom: 5px;border-top: 1px solid #ccc;border-bottom:1px solid #ccc;font-weight: 600;">
+          <div class="col-md-1"></div>
+          <div class="col-md-3">Date</div>
+          <div class="col-md-1">Time In</div>
+          <div class="col-md-1">Time Out</div>
+          <div class="col-md-1">Less Hour</div>
+          <div class="col-md-1">Hours</div>
+          <div class="col-md-1">Hour Charge</div>
+          <div class="col-md-1">Trip Charge</div>
+          <div class="col-md-1">Toll/Park</div>
+          <div class="col-md-1">Totaal</div>
+        </div>
+        <div class="row" *ngFor="let i of invoice.invoiceItem;let x=index" style="margin-top:5px;border-bottom: 1px solid #ccc">
+          <div class="col-md-1">
+            <div class="form-group">
+              <button (click)="remove(x)" class="btn btn-danger btn-sm btn-block hidden-print">X</button>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <!-- <input type="text" class="form-control form-control-sm" [(ngModel)]="i.it_d" name="a_{{x}}"> -->
+              <input [matDatepicker]="myDatepicker" [(ngModel)]="i.it_d" name="a_{{x}}">
+             <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+             <mat-datepicker #myDatepicker></mat-datepicker>
+
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="i.ti_d" name="c_{{x}}">
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="i.to_d" name="d_{{x}}" (focusout)="calculate()">
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="i.lessHour" name="e_{{x}}" (focusout)="calculate()">
+            </div>
+          </div>
+          <div class="col-md-1">{{i.totalHour}}</div>
+          <div class="col-md-1">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="i.hourCharge" name="z_{{x}}" (focusout)="calculate2()">
+          </div>
+
+          <!--<div class="col-md-1">{{i.hourCharge}}</div>-->
+          <div class="col-md-1">
+            <div class="form-group">
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="i.tripCharge" name="f_{{x}}" (focusout)="calculate2()">
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="i.parkCharge" name="g_{{x}}" (focusout)="calculate2()">
+            </div>
+          </div>
+          <div class="col-md-1">{{i.totalCharge}}</div>
+          <div class="col-md-1"></div>
+          <div class="col-md-10">
+            <div class="form-group">
+              <input type="text" placeholder="Description..." class="form-control form-control-sm" [(ngModel)]="i.description" name="b_{{x}}">
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+            <button class="btn btn-primary btn-sm hidden-print" (click)="addLine()">New Line</button>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-8 text-right">
+            Deduction
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <input type="text" [(ngModel)]="invoice.deduction" class="form-control form-control-sm" name="h" (focusout)="calculate()">
+            </div>
+          </div>
+          <div class="col-md-8 text-right">
+            Gratuity
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <input type="text" [(ngModel)]="invoice.gratuity" class="form-control form-control-sm" name="i" (focusout)="calculate()">
+            </div>
+          </div>
+
+          <div class="col-md-8 text-right">
+            Net Payable
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <input type="text" readonly [(ngModel)]="invoice.grossAmount" name="j" class="form-control form-control-sm">
+            </div>
+          </div>
+          <div class="hidden-print col-md-8 text-right">
+            Status
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <select name="status" [(ngModel)]="invoice.status" class="hidden-print form-control form-control-sm">
+                <option value="UN-PAID">UN-PAID</option>
+                <option value="PAID">PAID</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div class="row ">
+      <div class="col-md-12">
+        <div class="form-group row">
+          <label class="col-md-2" for="">Description</label>
+          <input type="text" [(ngModel)]="invoice.description" name="ji" class="form-control form-control-sm col-md-5">
+
+
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div class="row">
+      <div *ngIf="invoice.id==null" class="col-md-12">
+
+        <div class="form-group text-center">
+          <button (click)="save()" class="btn btn-primary btn-lg hidden-print">Save Invoice</button>
+
+          <button (click)="reset()" class="btn btn-link hidden-print">Reset</button>
+        </div>
+
+
+      </div>
+
+      <div *ngIf="invoice.id!=null" class="col-md-12">
+        <div class="form-group text-center">
+          <button (click)="update()" class="btn btn-primary btn-lg hidden-print">Update Invoice</button>
+          <button (click)="reset()" class="btn btn-link hidden-print">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 hidden-print">
+      <h2>Invoice List</h2>
+      <p>All created invoices.</p>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-8">
+      <div class="form-group hidden-print">
+        <h3>Filter Invoice By Invoice Number</h3>
+      </div>
+
+      <div class="form-group hidden-print">
+        <input type="text" [(ngModel)]="filterText" placeholder="Enter Invoice Number" class="form-control form-control-sm">
+      </div>
+      <div class="form-group">
+        <div class=row>
+          <button (click)="filter()" class="btn btn-primary btn-sm hidden-print">Filter</button>
+          <p>.</p>
+          <button (click)="clearfilter()" class="btn btn-primary btn-sm hidden-print">Clear Filter</button>
+          <p>.</p>
+          <button class="btn btn-primary btn-sm hidden-print" (click)="print()">Print(O)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="container hidden-print">
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Invoice No.</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Company Name</th>
+        <th>Guest Name</th>
+        <th>Driver Name</th>
+
+        <th>Vehicle</th>
+        <th>Amount</th>
+        <th>...</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of invoices">
+        <td>{{i.id}}</td>
+        <td>{{i.status}}</td>
+        <!-- <td>{{i.dated | date:'dd-MM-yyyy'}}</td> -->
+        <td>{{i.dated | date:'dd-MM-yyyy'}}</td>
+        <td>{{i.company.name}}</td>
+        <td>{{i.guest}}</td>
+        <td>{{i.driver.name}}</td>
+        <td>{{i.vehicle.name}}</td>
+        <td>{{i.grossAmount}}</td>
+        <td>
+          <button (click)="getInvoice(i.id)" class="btn btn-primary btn-sm">View</button>
+          <!--<a routerLink="view/{{i.id}}" class="btn btn-primary btn-sm">Print</a>-->
+          <button (click)="deleteInvoice(i.id)" class="btn btn-danger btn-sm">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+  </table>
+</div>

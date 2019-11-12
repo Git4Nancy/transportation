@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+  <h1>Vehicle List</h1>
+</div>
+  <div class="col-md-4"></div>
+</div>
+</div>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+<table class="table table-striped table-bordered table-hover table-sm">
+  <tr>
+    <th>
+      Vehicle No.
+    </th>
+    <th>
+      Vehicle Size
+    </th>
+    <th>
+      Price
+    </th>
+    <th>
+      ..
+    </th>
+  </tr>
+  <tr *ngFor="let vehicle of vehicleList">
+     
+    <td>
+     {{vehicle.id}}
+    </td>
+    <td>
+      {{vehicle.name}}
+    </td>
+    <td>
+      {{vehicle.rate}}
+    </td>
+    <td>
+       
+      <button class="btn btn-primary" (click)="edit(vehicle)" >Edit</button>
+      <button class="btn btn-outline-danger" (click)="delete(vehicle)">Delete</button>
+    </td>
+  </tr>
+  </table>
+</div>
+</div>
+</div>
+<!--///////////////////  3RD DIV ////////////////////////////////////-->
+<div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+         <!-- <pagination [totalItems]="vehicleList.length" [itemsPerPage]="pageSize" [pageChanged]="pageChanged(event$)"></pagination>-->
+          </div>
+          <div class="col-md-4">
+            </div>
+      </div>
+      </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+  <h3>Create Vehicle List</h3>
+ <!-- <form [formGroup]="myForm">
+  <label for="myNum">Some Val</label>
+  
+  <input type='number' id="myNum" formControlName="myNum">
+<div *ngIf="myForm.controls['myNum'].hasError('max')">
+  Minimum required number is 15.
+</div>
+</form>-->
+  <form [formGroup]="form">
+  <table>
+    <tr>
+      <td>
+        Size
+      </td>
+      <td> 
+          
+          <textarea type="text" [(ngModel)]="currentVehicle.name" formControlName="name"></textarea>
+          
+        </td>
+    </tr>
+    <tr>
+      <td>
+        Price
+      </td>
+      <td>
+        <input type="number" [(ngModel)]="currentVehicle.rate" formControlName="rate">
+   
+      </td>
+      
+    </tr>
+    <tr *ngIf="currentVehicle.id==null">
+      <td >
+        <br>
+        <button [disabled]="!form.valid" (click)="create()">Save New Vehicle</button>
+      </td>
+      </tr>
+      <tr *ngIf="currentVehicle.id!=null">
+      <td >
+        <br>
+        <button (click)="update()">Update Vehicle</button>
+        <button (click)="cancel()">Cancel</button>
+      </td>
+    </tr>
+  </table>
+</form>
+</div>
+<div class="col-md-2"></div>
+<div class="col-md-5"></div>
+</div>
+</div>

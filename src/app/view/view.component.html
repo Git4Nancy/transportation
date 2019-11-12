@@ -1,0 +1,22 @@
+<p class="hidden-print">
+  view works!
+</p>
+<div >
+  <table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Invoice Number</th>
+      <th>Company Name</th>
+      <th>Guest</th>
+    </tr>
+  </thead>
+    <tbody>
+    <tr *ngFor="let i of invoiceList">
+        <td>{{i.invoiceId}}</td>
+        <td>{{i.company}}</td>
+        <td>{{i.guest}}</td>
+    </tr>
+  </tbody>
+  </table>
+</div>
+<button class="hidden-print" (click)="print()" >Print(O)</button>

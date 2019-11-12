@@ -1,0 +1,125 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h1>Company List</h1>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>
+<div class="container">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered table-hover table-sm">
+      <thead>
+        <tr>
+          <th>S No.</th>
+          <th>Title</th>
+          <th>Address</th>
+          <th>Phone No.</th>
+          <th>Fax</th>
+          <th>Detail</th>
+          <th>Date</th>
+          <th>...</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let company of returnedArray">
+          <td>{{company.id}}</td>
+          <td>{{company.name}}</td>
+          <td>{{company.address}}</td>
+          <td>{{company.ph}}</td>
+          <td>{{company.fax}}</td>
+          <td>{{company.detail}}</td>
+          <td>{{company.dated}}</td>
+
+
+          <td>
+            <button class="btn btn-primary" (click)="edit(company)">Edit</button>
+            <button class=" btn btn-outline-danger" (click)="delete(company)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="container">
+<pagination [totalItems]="companyList.length" [itemsPerPage]="pageSize" (pageChanged)="m($event)"></pagination>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <h2>Create And Edit Company</h2>
+      <form [formGroup]="form1">
+      <table>
+        <tr>
+          <td>Name</td>
+          <td>
+            <input type="text"  [(ngModel)]="currentCompany.name" formControlName="name">
+          </td>
+        </tr>
+        <tr>
+          <td>Address</td>
+          <td>
+            <textarea type="text" [(ngModel)]="currentCompany.address" formControlName="name"></textarea>
+          </td>
+
+        </tr>
+        <tr>
+          <td>Phone</td>
+          <td>
+            <input type="number" [(ngModel)]="currentCompany.ph" formControlName="rate" >
+          </td>
+
+        </tr>
+        <tr>
+          <td>Fax</td>
+          <td>
+            <input type="text" [(ngModel)]="currentCompany.fax" formControlName="dummy">
+          </td>
+        </tr>
+        <tr>
+          <td>Detail</td>
+          <td>
+            <input type="text" [(ngModel)]="currentCompany.detail" formControlName="dummy">
+          </td>
+        </tr>
+        <tr *ngIf="currentCompany.id!=null">
+          <td colspan="2">
+            <button [disabled]="!form1.valid" (click)="update()">Update Company</button>
+            <button (click)="Cancel()">Cancel</button>
+          </td>
+        </tr>
+        <tr *ngIf="currentCompany.id==null">
+          <td colspan="2">
+            <button [disabled]="!form1.valid" (click)="save()">Save New</button>
+          </td>
+        </tr>
+
+      </table>
+      </form>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-5">
+      <div class="form-group">
+        <h2>Filter Company</h2>
+      </div>
+      <div class="form-group">
+        <select name="companydd" id="" [(ngModel)]="filterBy" class="formcontrol form-control-sm">
+          <option ngValue="">-- Select Column Name --</option>
+          <option ngValue="Id">Id</option>
+          <option ngValue="Company">Company</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input type="text" [(ngModel)]="filterText" placeholder="Enter Keyword" class="formcontrol form-control-sm">
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <button class="btn btn-primary btn-sm" (click)="filter()">Filter</button>
+          <p>.</p>
+          <button class="btn btn-primary btn-sm" (click)="clearFilter()">CLear Filter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

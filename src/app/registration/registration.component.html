@@ -1,0 +1,293 @@
+<!-- <mat-form-field >
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Above By Keyword" style="border:solid " class="form-control form-control-sm ">
+</mat-form-field> -->
+<!-- <mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field> -->
+<br>
+<br>
+<div class="mat-elevation-z8">
+<table   mat-table [dataSource]="dataSource" #table  matSort class=" table table-striped table-bordered table-hover table-sm">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} 
+        <button class="btn btn-primary" (click)="get(element.id)">View</button>
+        <button class="btn btn-outline-danger" (click)="delete(element.id)">Delete</button>
+      
+   </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="companyName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Company Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
+  </ng-container>
+  <ng-container matColumnDef="arvlDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Arrival Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.arvlDate | date:'dd-MM-yyyy'}} </td>
+  </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="dptDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Departure Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.dptDate | date:'dd-MM-yyyy'}} </td>
+  </ng-container>
+  <ng-container matColumnDef="guest">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Guest </th>
+    <td mat-cell *matCellDef="let element"> {{element.guest}} </td>
+  </ng-container>
+  <ng-container matColumnDef="driverName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Driver Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.driverName}} </td>
+  </ng-container>
+  <ng-container matColumnDef="driverPh">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Cell </th>
+    <td mat-cell *matCellDef="let element"> {{element.driverPh}} </td>
+  </ng-container>
+  <ng-container matColumnDef="vehicleName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Vehicle Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.vehicleName}} </td>
+  </ng-container>
+  <ng-container matColumnDef="comments">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Comments </th>
+    <td mat-cell *matCellDef="let element"> {{element.comments}} </td>
+  </ng-container>
+ 
+ 
+  <ng-container matColumnDef="status">
+      
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Status </th>
+   
+    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    
+  </ng-container>
+   <ng-container matColumnDef="invoiceId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Invoice ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.invoiceId}} </td>
+  </ng-container> 
+  
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator  #scheduledOrdersPaginator [pageSize]="10" [pageSizeOptions]="[5, 10,15, 20]" showFirstLastButtons></mat-paginator>
+<!-- <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator> -->
+</div>
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h2>Registration List</h2>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div> -->
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped table-bordered table-hover table-sm" style="max-width: 100%;">
+        <thead>
+          <tr>
+            <th>
+              S No.
+            </th>
+
+            <th>
+              Company
+            </th>
+            <th>
+              Arrival Date
+            </th>
+            <th>
+              Departure Date
+            </th>
+            <th>
+              Guest Name
+            </th>
+            <th>
+              Driver Name
+            </th>
+            <th>
+              Cell Number
+            </th>
+            <th>
+              Vehicle Type
+            </th>
+            <th>
+              Comments
+            </th>
+            <th>
+              Resv. Status
+            </th>
+            <th>
+              Invoice #
+            </th>
+
+            <th>
+              ..
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let registration of returnedArray">
+            <!-- <td>{{registration.id}}</td> -->
+
+            <!-- <td>{{registration.company.name}}</td> -->
+            <!-- <td>{{registration.arvl_dt | date:'dd-MM-yyyy'}}</td> -->
+            <!-- <td>{{registration.dpt_d | date:'dd-MM-yyyy'}}</td> -->
+            <!-- <td>{{registration.guestName}}</td> -->
+            <!-- <td>{{registration.driver.name}}</td> -->
+            <!-- <td>{{registration.driver.ph}}</td> -->
+            <!-- <td>{{registration.vehicle.name}}</td> -->
+            <!-- <td>{{registration.comments}}</td> -->
+            <!-- <td>{{registration.reservationStatus}}</td> -->
+            <!-- <td>{{registration.invoiceId}}</td> -->
+
+            <!-- <td>
+              <button class="btn btn-primary" (click)="get(registration.id)">View</button>
+              <button class="btn btn-outline-danger" (click)="delete(registration.id)">Delete</button>
+
+            </td>
+          </tr>
+        </tbody>
+      </table> -->
+    <!-- </div>
+   
+  </div>
+</div>  -->
+<br>
+<!-- <pagination [totalItems]="registrationList.length" [itemsPerPage]="pageSize" (pageChanged)="pageChanged($event)"></pagination> -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      
+      <table>
+        <tbody>       <tr>
+          <td>Company</td>
+          <td>
+            
+            <select name="companydd" [(ngModel)]="comSelected" (ngModelChange)='onComSelected($event)' >
+            
+                <option *ngFor="let c of companyList" [value]="c.id">{{c.name}}</option>
+              </select>
+          </td>
+        </tr>
+        <!--<tr>
+          <td>Wing</td>
+          <td>
+            <input type="text" [(ngModel)]="currentRegistration.wing" name="wi">
+          </td>
+        </tr>-->
+        <tr>
+          <td>Arrival Date</td>
+          <td>
+            <!-- <input type="text" [(ngModel)]="currentRegistration.arvl_dt" name="adi" (focusout)="calculate1()"> -->
+            <input [matDatepicker]="myDatepicker1" [(ngModel)]="currentRegistration.arvl_dt" name="ard">
+            <mat-datepicker-toggle [for]="myDatepicker1"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepicker1></mat-datepicker>
+
+          </td>
+        </tr>
+        <tr>
+          <td>Departure Date</td>
+          <td>
+            <!-- <input type="text" [(ngModel)]="currentRegistration.dpt_d" name="dpi" (focusout)="calculate()"> -->
+            
+            <input [matDatepicker]="myDatepicker"  [(ngModel)]="currentRegistration.dpt_d" name="dpd">
+            <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepicker>  </mat-datepicker>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>Guest Name</td>
+          <td>
+             
+            <input type="text" [(ngModel)]="currentRegistration.guestName" name="gni" required>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>Driver</td>
+          <td>
+              
+              <select name="dnmd" [(ngModel)]="driverSelected" (ngModelChange)='onDriverSelected($event)' >
+           
+                  <option *ngFor="let c of driverList" [value]="c.id">{{c.name}}</option>
+                </select>
+          </td>
+        </tr>
+        <!--<tr>
+          <td>Cell No.</td>
+          <td><input type="text" [(ngModel)]="currentRegistration.cell" name="celi"></td>
+        </tr>-->
+        <tr>
+          <td>Vehicle</td>
+          <td>
+              <select name="vehicle" [(ngModel)]="vehSelected" (ngModelChange)='onVehSelected($event)'  >
+            
+                  <option *ngFor="let c of vehicleList" [value]="c.id">{{c.name}}</option>
+                </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Comment</td>
+          <td>
+            <input type="text" [(ngModel)]="currentRegistration.comments" name="commnt">
+          </td>
+        </tr>
+        <tr>
+          <td>Reservation Status</td>
+          <td>
+            <select name="rs" [(ngModel)]="currentRegistration.reservationStatus">
+              <option value="FRESH">FRESH</option>
+              <option value="SCHEDULED">SCHEDULED</option>
+              <option value="DONE">DONE</option>
+
+            </select>
+
+          </td>
+        </tr>
+        <tr>
+          <td>Invoice No.</td>
+          <td>
+
+            <input type="text" [(ngModel)]="currentRegistration.invoiceId"  name="incno">
+          </td>
+        </tr>
+
+
+        <tr *ngIf="currentRegistration.id!=null">
+          <td>
+            <button class="btn btn-primary" (click)="update()">Update</button>
+          </td>
+          <td>
+            <button class="btn btn-primary" (click)="cancel()">Cancel</button>
+          </td>
+        </tr>
+        <tr *ngIf="currentRegistration.id==null">
+          <td>
+            <button  class="btn btn-primary" (click)="save()">Save</button>
+          </td>
+
+        </tr>
+      </tbody>
+ 
+      </table>
+    
+    </div>
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-5">
+
+    </div>
+  </div>
+</div>
