@@ -99,27 +99,17 @@ export class RegistrationComponent implements OnInit {
   }
   onVehSelected(val:any)
   {
-    this.vehSelected=val;
-    this.currentRegistration.vehicle.id=val;
-  // this.vehSelected=this.currentRegistration.vehicle.id;
-   //this.currentRegistration.vehicle.id=val;
-  // this.loadAllVehicle();
+   
+   this.currentRegistration.vehicle.id=val;
+  
   }
   onComSelected(val:any)
   {
-    this.comSelected=val;
     this.currentRegistration.company.id=val;
-    //this.comSelected=this.currentRegistration.company.id;
-    //this.currentRegistration.company.id=val;
-    //this.loadAllCompanies();
-}
-onDriverSelected(val:any)
+   }
+  onDriverSelected(val:any)
   {
-    this.driverSelected=val;
-    this.currentRegistration.driver.id=val;
-  // this.driverSelected=this.currentRegistration.driver.id;
-   //this.currentRegistration.driver.id=val;
- //  this.loadAllDrivers;
+   this.currentRegistration.driver.id=val;
    }
   loadAllCompanies() {
     this.companyService.getAllCompanies().subscribe(resp => {
@@ -149,6 +139,7 @@ onDriverSelected(val:any)
     });
   }
   save() {
+    console.log(this.currentRegistration);
     this.registrationService.saveRegistration(this.currentRegistration).subscribe(resp => {
     
     this.cancel();

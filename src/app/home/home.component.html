@@ -1,3 +1,11 @@
+
+<div class="container" style=" border-style: inset;">
+  <h2>New York Transportation Plus Inc.</h2>
+  <p><I>1 EDGEWOOD DRIVE, NEW HYDE PARK NY. 11040</I></p>
+  <p><i>PHONES: 516-369-0016 , 202-258-0887</i></p>
+  <P><I>OFFICE: 516-294-9402   FAX 516-294-9403</I></P>
+ 
+</div>
 <br>
 <div class="container">
   <form>
@@ -20,8 +28,13 @@
           </select>
 
         </div>
-
+        <div class="form-group row">
+          <label class="col-md-4" for=""></label>
+          <textarea type="text" style="border:#eee;font-size:18px;" class="form-control form-control-sm col-md-8" [(ngModel)]="this.invoice.company.address" name="cadd"></textarea>
+        </div> 
       </div>
+      
+
       <div class="col-md-2"></div>
       <div class="col-md-5">
         <div class="form-group row">
@@ -176,6 +189,9 @@
         </div>
       </div>
     </div>
+    <div>
+    <p>(Make check payable to New York Transportation Plus Inc.)</p>
+  </div>
     <br>
 
     <div class="row">

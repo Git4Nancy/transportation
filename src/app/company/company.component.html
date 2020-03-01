@@ -50,48 +50,49 @@
     <div class="col-md-5">
       <h2>Create And Edit Company</h2>
       <form [formGroup]="form1">
-      <table>
+      <table class="table table-borderless table-sm ">
         <tr>
           <td>Name</td>
           <td>
             <input type="text"  [(ngModel)]="currentCompany.name" formControlName="name">
+            <!-- <p class="text-danger">**</p> -->
           </td>
         </tr>
         <tr>
           <td>Address</td>
           <td>
-            <textarea type="text" [(ngModel)]="currentCompany.address" formControlName="name"></textarea>
+            <textarea type="text" [(ngModel)]="currentCompany.address" formControlName="address"></textarea>
           </td>
 
         </tr>
         <tr>
           <td>Phone</td>
           <td>
-            <input type="number" [(ngModel)]="currentCompany.ph" formControlName="rate" >
+            <input type="text" [(ngModel)]="currentCompany.ph" formControlName="phone" >
           </td>
 
         </tr>
         <tr>
           <td>Fax</td>
           <td>
-            <input type="text" [(ngModel)]="currentCompany.fax" formControlName="dummy">
+            <input type="text" [(ngModel)]="currentCompany.fax" formControlName="fax">
           </td>
         </tr>
         <tr>
           <td>Detail</td>
           <td>
-            <input type="text" [(ngModel)]="currentCompany.detail" formControlName="dummy">
+            <input type="text" [(ngModel)]="currentCompany.detail" formControlName="detail">
           </td>
         </tr>
         <tr *ngIf="currentCompany.id!=null">
           <td colspan="2">
-            <button [disabled]="!form1.valid" (click)="update()">Update Company</button>
-            <button (click)="Cancel()">Cancel</button>
+            <button [disabled]="!form1.valid" (click)="update()" class="btn btn-primary btn-sm">Update Company</button>
+            <button (click)="cancel()" class="btn btn-primary btn-sm">Cancel</button>
           </td>
         </tr>
         <tr *ngIf="currentCompany.id==null">
           <td colspan="2">
-            <button [disabled]="!form1.valid" (click)="save()">Save New</button>
+            <button [disabled]="!form1.valid" (click)="save()" class="btn btn-primary btn-sm">Save New</button>
           </td>
         </tr>
 

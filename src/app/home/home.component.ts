@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   comSelected: Number;
   vehSelected: Number;
   driverSelected: Number;
+ 
   amount = 0;
   constructor(private dataServices: DataService, private driverService: DriverService, private companyService: CompanyService, private vehicleService: VehicleService, private registrationService: RegistrationService) {
 
@@ -54,25 +55,17 @@ export class HomeComponent implements OnInit {
 
   }
   onComSelected(val: any) {
-    //alert(val);
-    this.comSelected = this.invoice.company.id;
+   
     this.invoice.company.id=val;
-    //alert(this.invoice.company.id);
-    this.loadCompany();
-  
+  this.loadCompany();
   }
   onDriverSelected(val: any) {
-
-    this.driverSelected = this.invoice.driver.id;
-    this.invoice.driver.id = val;
-    this.loadDriver();
+    this.invoice.driver.id=val;
   }
   onVehSelected(val: any) {
 
-    this.vehSelected = this.invoice.vehicle.id;
-    this.invoice.vehicle.id = val;
-    this.loadVehicle();
-    //this.addLine();
+    
+    this.invoice.vehicle.id=val;
   }
   getInvoice(id) {
     this.dataServices.getInvoice(id).subscribe(resp => {
@@ -144,8 +137,7 @@ export class HomeComponent implements OnInit {
   loadCompany() {
     this.companyService.getCompany(this.invoice.company.id).subscribe(resp => {
       this.invoice.company = resp;
-      //this.invoice.company.id=resp.id;
-      // alert("Load company "+this.invoice.company.id);
+      
     });
   }
 
@@ -177,6 +169,12 @@ console.log(this.invoice);
       // console.log(resp);
       this.invoice = new Invoice();
       this.loadInvoices();
+      this.invoice.vehicle = new Vehicle();
+    this.invoice.driver = new Driver();
+    this.invoice.company = new Company();
+      this.comSelected = null;
+      this.driverSelected = null;
+      this.vehSelected = null;
     });
   }
   update() {

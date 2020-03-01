@@ -25,9 +25,11 @@ export class CompanyComponent implements OnInit {
     this.loadAllCompany();
     this.form1=new FormGroup({
       name:new FormControl("",Validators.compose([Validators.required])),
-      dummy:new FormControl(),
-      
-      rate:new FormControl("",Validators.compose([Validators.required,Validators.pattern("^[0-9]*$"),Validators.min(1),Validators.max(256)]))
+      address:new FormControl("",Validators.compose([Validators.required])),
+      phone:new FormControl("",Validators.compose([Validators.required])),
+      fax:new FormControl(),
+      detail:new FormControl()      
+      // rate:new FormControl("",Validators.compose([Validators.required,Validators.pattern("^[0-9]*$"),Validators.min(1),Validators.max(256)]))
      });
   }
   filter() {
@@ -82,7 +84,10 @@ this.returnedArray=this.companyList.length<this.pageSize ? this.companyList.slic
       this.loadAllCompany();
     })
   }
-  cancel() { this.currentCompany = new Company(); }
+  cancel() { 
+    
+    this.currentCompany = new Company(); 
+  }
   save() {
 
     this.companyService.saveCompany(this.currentCompany).subscribe(resp => {
@@ -95,10 +100,9 @@ this.returnedArray=this.companyList.length<this.pageSize ? this.companyList.slic
 
   delete(company) {
     company.active=false;
-    this.companyService.updateCompany(company).subscribe(resp => {
-      // alert("Deleted");
-     
-      this.loadAllCompany();
+    this.companyService.updateCompany(this.currentCompany).subscribe(resp => {
+        
     });
+    this.loadAllCompany();
   }
 }

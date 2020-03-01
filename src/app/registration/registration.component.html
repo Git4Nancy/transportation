@@ -1,9 +1,9 @@
 <!-- <mat-form-field >
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Above By Keyword" style="border:solid " class="form-control form-control-sm ">
 </mat-form-field> -->
-<!-- <mat-form-field>
+ <mat-form-field>
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-</mat-form-field> -->
+</mat-form-field> 
 <br>
 <br>
 <div class="mat-elevation-z8">
@@ -73,103 +73,15 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 <mat-paginator  #scheduledOrdersPaginator [pageSize]="10" [pageSizeOptions]="[5, 10,15, 20]" showFirstLastButtons></mat-paginator>
-<!-- <mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]">
-</mat-paginator> -->
-</div>
-
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-      <h2>Registration List</h2>
-    </div>
-    <div class="col-md-4"></div>
-  </div>
-</div> -->
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table table-striped table-bordered table-hover table-sm" style="max-width: 100%;">
-        <thead>
-          <tr>
-            <th>
-              S No.
-            </th>
-
-            <th>
-              Company
-            </th>
-            <th>
-              Arrival Date
-            </th>
-            <th>
-              Departure Date
-            </th>
-            <th>
-              Guest Name
-            </th>
-            <th>
-              Driver Name
-            </th>
-            <th>
-              Cell Number
-            </th>
-            <th>
-              Vehicle Type
-            </th>
-            <th>
-              Comments
-            </th>
-            <th>
-              Resv. Status
-            </th>
-            <th>
-              Invoice #
-            </th>
-
-            <th>
-              ..
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let registration of returnedArray">
-            <!-- <td>{{registration.id}}</td> -->
-
-            <!-- <td>{{registration.company.name}}</td> -->
-            <!-- <td>{{registration.arvl_dt | date:'dd-MM-yyyy'}}</td> -->
-            <!-- <td>{{registration.dpt_d | date:'dd-MM-yyyy'}}</td> -->
-            <!-- <td>{{registration.guestName}}</td> -->
-            <!-- <td>{{registration.driver.name}}</td> -->
-            <!-- <td>{{registration.driver.ph}}</td> -->
-            <!-- <td>{{registration.vehicle.name}}</td> -->
-            <!-- <td>{{registration.comments}}</td> -->
-            <!-- <td>{{registration.reservationStatus}}</td> -->
-            <!-- <td>{{registration.invoiceId}}</td> -->
-
-            <!-- <td>
-              <button class="btn btn-primary" (click)="get(registration.id)">View</button>
-              <button class="btn btn-outline-danger" (click)="delete(registration.id)">Delete</button>
-
-            </td>
-          </tr>
-        </tbody>
-      </table> -->
-    <!-- </div>
-   
-  </div>
-</div>  -->
-<br>
-<!-- <pagination [totalItems]="registrationList.length" [itemsPerPage]="pageSize" (pageChanged)="pageChanged($event)"></pagination> -->
 
 <div class="container">
   <div class="row">
-    <div class="col-md-5">
       
-      <table>
-        <tbody>       <tr>
+    <div class="col-md-5">
+        <h3>Registration Form</h3>
+      <table class="table table-borderless table-sm ">
+        <tbody>     
+            <tr>
           <td>Company</td>
           <td>
             
