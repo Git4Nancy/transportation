@@ -20,5 +20,5 @@ export class Invoice {
     vehicle: Vehicle=null;
     invoiceItem: InvoiceItem[] = [];
     deduction: number = 0;
-       
+    rate:number=0;
 }

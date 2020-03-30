@@ -9,7 +9,7 @@
       <div class="form-group hidden-print">
         <h3>Filter List Of UN-PAID Invoices Of Various Companies</h3>
       </div>
-      
+      <ejs-dropdownlist id='ddlelement' #samples [dataSource]='data' [fields]='fields' [placeholder]='text' [allowFiltering]='true' (filtering)='onFiltering($event)'></ejs-dropdownlist>
       <div class="form-group hidden-print">
          <!-- <input type="text" [(ngModel)]="filterText" placeholder="Enter Company Name" class="form-control form-control-sm">-->
          <select  name="cc"  [(ngModel)]="this.invoice.company" class="form-control form-control-sm col-md-8">

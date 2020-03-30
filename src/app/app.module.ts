@@ -6,6 +6,7 @@ import { StorageServiceModule } from 'angular-webstorage-service';
 import {AuthInterceptor} from './httpinterceptor/auth.interceptor';
 import { AppHomeComponent } from './app-home/app-home.component';
 import {MatTableModule} from '@angular/material/table';
+
 import {
   HttpClientModule,
   HttpClient,
@@ -72,7 +73,7 @@ const route: Routes = [
     PrintInvoiceComponent,
     LoginComponent,
     LogoutComponent,
-    
+   
   ],
   imports: [
     RouterModule.forRoot(route,{useHash: true}),

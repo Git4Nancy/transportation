@@ -14,6 +14,7 @@ export class InvoiceItem {
     totalHour: number = 0;
     tripCharge: number = 0;
     invoice:Invoice;  
+   
     to_d: string;
     ti_d: string;
     it_d: string;

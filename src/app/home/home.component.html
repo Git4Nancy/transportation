@@ -58,7 +58,11 @@
             <option *ngFor="let c of vehicles" [value]="c.id">{{c.name}}</option>
           </select>
         </div>
-
+       <div class="form-group row">
+            <label class="col-md-4" for="">Charges/hr</label>
+            <input type="number" class="form-control form-control-sm col-md-8" [(ngModel)]="this.invoice.rate" name="rate">
+  
+            </div>
       </div>
     </div>
 
@@ -74,7 +78,7 @@
           <div class="col-md-1">Hour Charge</div>
           <div class="col-md-1">Trip Charge</div>
           <div class="col-md-1">Toll/Park</div>
-          <div class="col-md-1">Totaal</div>
+          <div class="col-md-1">Total</div>
         </div>
         <div class="row" *ngFor="let i of invoice.invoiceItem;let x=index" style="margin-top:5px;border-bottom: 1px solid #ccc">
           <div class="col-md-1">
@@ -82,6 +86,7 @@
               <button (click)="remove(x)" class="btn btn-danger btn-sm btn-block hidden-print">X</button>
             </div>
           </div>
+          
           <div class="col-md-3">
             <div class="form-group">
               <!-- <input type="text" class="form-control form-control-sm" [(ngModel)]="i.it_d" name="a_{{x}}"> -->
@@ -93,12 +98,13 @@
           </div>
           <div class="col-md-1">
             <div class="form-group">
-              <input type="text" class="form-control form-control-sm" [(ngModel)]="i.ti_d" name="c_{{x}}">
+              <!--<input type="text" class="form-control form-control-sm" [(ngModel)]="i.ti_d" name="c_{{x}}">-->
+              <input type="text"  class="form-control form-control-sm" value="hi" [(ngModel)]="i.ti_d" name="c_{{x}}">
             </div>
           </div>
           <div class="col-md-1">
             <div class="form-group">
-              <input type="text" class="form-control form-control-sm" [(ngModel)]="i.to_d" name="d_{{x}}" (focusout)="calculate()">
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="i.to_d" name="d_{{x}}" *ngIf="i.ti_d && this.invoice.rate" (focusout)="calculate()">
             </div>
           </div>
           <div class="col-md-1">
@@ -107,6 +113,7 @@
             </div>
           </div>
           <div class="col-md-1">{{i.totalHour}}</div>
+          
           <div class="col-md-1">
             <input type="text" class="form-control form-control-sm" [(ngModel)]="i.hourCharge" name="z_{{x}}" (focusout)="calculate2()">
           </div>
@@ -122,7 +129,7 @@
               <input type="text" class="form-control form-control-sm" [(ngModel)]="i.parkCharge" name="g_{{x}}" (focusout)="calculate2()">
             </div>
           </div>
-          <div class="col-md-1">{{i.totalCharge}}</div>
+          <div class="col-md-.5">{{i.totalCharge}}</div>
           <div class="col-md-1"></div>
           <div class="col-md-10">
             <div class="form-group">
@@ -133,9 +140,10 @@
         <br>
         <div class="row">
           <div class="col-md-12">
-            <button class="btn btn-primary btn-sm hidden-print" (click)="addLine()">New Line</button>
+            <button class="btn btn-primary btn-sm hidden-print" (click)="addLine()" >New Line</button>
           </div>
         </div>
+       
         <br>
         <div class="row">
           <div class="col-md-8 text-right">

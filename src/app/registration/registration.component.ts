@@ -62,11 +62,8 @@ export class RegistrationComponent implements OnInit {
   
   pageChanged(event: PageChangedEvent): void
   {
-     //console.log("Pagination");
      const startItem = (event.page - 1) * event.itemsPerPage;
      const endItem = event.page * event.itemsPerPage;
-     //this.dataSource = this.registrationList.slice(startItem, endItem);
-     
   }
   cancel()
   {
@@ -87,9 +84,6 @@ export class RegistrationComponent implements OnInit {
     
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-     
-     //this.dataSource = this.registrationList.slice(0, this.pageSize);
-
     });
   }
   applyFilter(filterValue: string) {
@@ -99,9 +93,7 @@ export class RegistrationComponent implements OnInit {
   }
   onVehSelected(val:any)
   {
-   
    this.currentRegistration.vehicle.id=val;
-  
   }
   onComSelected(val:any)
   {

@@ -31,8 +31,10 @@ export class HomeComponent implements OnInit {
   comSelected: Number;
   vehSelected: Number;
   driverSelected: Number;
- 
+ vehicle:Vehicle;
   amount = 0;
+  try:any="new";
+  temoraryInvoiceItem:InvoiceItem;
   constructor(private dataServices: DataService, private driverService: DriverService, private companyService: CompanyService, private vehicleService: VehicleService, private registrationService: RegistrationService) {
 
   }
@@ -45,6 +47,7 @@ export class HomeComponent implements OnInit {
     this.invoice.vehicle = new Vehicle();
     this.invoice.company = new Company();
     this.invoice.driver = new Driver();
+    this.vehicle=new Vehicle();
     this.itemList = [];
     this.invoice.invoiceItem = this.itemList;
     //this.addLine();
@@ -63,9 +66,9 @@ export class HomeComponent implements OnInit {
     this.invoice.driver.id=val;
   }
   onVehSelected(val: any) {
-
-    
     this.invoice.vehicle.id=val;
+    this.loadVehicle();
+    
   }
   getInvoice(id) {
     this.dataServices.getInvoice(id).subscribe(resp => {
@@ -79,9 +82,10 @@ export class HomeComponent implements OnInit {
     });
 
   }
+ 
   addLine() {
     this.invoice.invoiceItem.push(new InvoiceItem());
-  }
+      }
   remove(index) {
     console.log(this.invoice.invoiceItem.splice(index, 1));
 
@@ -125,7 +129,7 @@ export class HomeComponent implements OnInit {
   loadVehicle() {
     this.vehicleService.get(this.invoice.vehicle.id).subscribe(resp => {
       this.invoice.vehicle = resp;
-
+      this.invoice.rate=this.invoice.vehicle.rate;
     });
   }
   loadDriver() {
@@ -207,27 +211,15 @@ console.log(this.invoice);
         continue;
       }
       this.loadVehicle();
-      //console.log(i.itemDate.getDay);
-      // let sd = [] = i.it_d.split("-");
-      // let sd = [] = ['12','12','1990'];
-      // let date = new Date(parseInt(sd[2]), parseInt(sd[1]), parseInt(sd[0]));
-      // i.itemDate = date;
-      //console.log("ejwgywejtwe  "+i.timeIn+"  "+ i.timeOut);
       let id = [] = i.ti_d.split(":");
-      // let idate = new Date( parseInt(id[0]), parseInt(id[1]), 0, 0);
-      // let idate = new Date(i.itemDate, parseInt(id[0]), parseInt(id[1]), 0, 0);
-      // i.timeIn = idate;
       let od = [] = i.to_d.split(":");
       let idate = new Date( 2000,0,0, parseInt(id[0]), parseInt(id[1]),0);
       let odate = new Date(2000,0,0,parseInt(od[0]), parseInt(od[1]), 0);
       i.timeOut = odate;
       i.timeIn=idate;
-      //console.log(i.timeIn+"    "+ i.timeOut)
-  
       let diff = Math.floor(i.timeOut.getTime()-i.timeIn.getTime()) / (1000 * 60);
       i.totalHour = (diff / 60) - i.lessHour;
-
-      i.hourCharge = ((i.totalHour) * this.invoice.vehicle.rate);
+      i.hourCharge = ((i.totalHour) * this.invoice.rate);
       i.totalCharge = parseFloat(i.hourCharge + '') + parseFloat(i.tripCharge + '') + parseFloat(i.parkCharge + '');
       this.amount = this.amount + i.totalCharge;
     }
@@ -238,7 +230,6 @@ console.log(this.invoice);
   }
 
   reset() {
-    //this.ngOnInit();
     this.comSelected = null;
     this.driverSelected = null;
     this.vehSelected = null;
@@ -248,8 +239,6 @@ console.log(this.invoice);
     this.invoice.company = new Company();
     this.itemList = [];
     this.invoice.invoiceItem = this.itemList;
-
-    //this.addLine();
     this.valj = null;
   }
 
